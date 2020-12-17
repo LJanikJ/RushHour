@@ -12,13 +12,16 @@ public class GameState {
     private ArrayList<Block> blocks;
     private ArrayList<GameState> moves;
     private boolean solved;
+    private RushHour game;
+
 
     public GameState() {
         blocks = new ArrayList<Block>();
         moves = new ArrayList<GameState>();
     }
 
-    public GameState(Block oldBlocks, int newDepth) {
+    public GameState(RushHour newGame, Block oldBlocks, int newDepth) {
+        game = newGame;
         copyBlocks(oldBlocks);
         moves = new ArrayList<GameState>();
         depth = newDepth;
@@ -68,7 +71,6 @@ public class GameState {
     public void setSolved(boolean newSolved) {
         solved = newSolved;
     }
-
 
 
     public isSolved() {
