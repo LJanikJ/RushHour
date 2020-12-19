@@ -153,15 +153,13 @@ public class GameState {
     }
 
     private boolean verifyHash() {
-        for (GameState state : game.getAllStates()) {
-            if (state.getHashKey().equals(hashKey)) {
-                if (state.getDepth() > depth) {
-                    state.setDepth(depth + 1);
-                    moves.add(state);
-                }
-
-                return false;
+        if (game.findState(hashKey)) {
+            if (game.getState(hashKey).getDepth() > depth) {
+                game.getState(hashKey).setDepth(depth + 1);
+                moves.add(game.getState(hashKey));
             }
+
+            return false;
         }
 
         return true;

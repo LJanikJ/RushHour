@@ -12,7 +12,7 @@ public class RushHour {
     private ArrayList<Block> blocks;
     private Point exitLocation;
     private GameState startingState;
-    private ArrayList<GameState> allStates;
+    private HashMap<String, GameState> allStates;
 
     public RushHour() {
         blocks = new ArrayList<Block>();
@@ -94,7 +94,23 @@ public class RushHour {
         blocks = newBlocks;
     }
 
+    public Map getAllStates() {
+        return allStates;
+    }
+
+    public boolean findState(String hashValue) {
+        if (allStates.get(hashValue) != null) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public GameState getState(String hashValue) {
+        return allStates.get(hashValue);
+    }
+
     public void addState(GameState newState) {
-        allStates.add(newState);
+        allStates.put(newState.getHashValue(), newState);
     }
 }
