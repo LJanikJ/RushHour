@@ -21,14 +21,15 @@ public class GameState {
     }
 
     public GameState(RushHour newGame, Block oldBlocks, int newDepth) {
-        game = newGame;
-        copyBlocks(oldBlocks);
         moves = new ArrayList<GameState>();
-        depth = newDepth;
 
+        setGame(newGame);
+        copyBlocks(oldBlocks);
+        setDepth(newDepth);
         setHashKey();
+        checkSolved();
 
-        isSolved();
+        game.addState(this);
     }
 
     //Getters and setters
@@ -64,31 +65,105 @@ public class GameState {
         return moves;
     }
 
-    public boolean getSolved() {
+    public boolean isSolved() {
         return solved;
     }
 
-    public void setSolved(boolean newSolved) {
-        solved = newSolved;
-    }
 
-
-    public isSolved() {
-        if (/* SOLVED */) {
-            solved = true;
-        } else {
-            solved = false;
-            checkAllMoves();
+    public boolean checkSolved() {
+        for (Block block : blocks) {
+            if (block.getStart()) {
+                if (block.getXyLocation().equals(game.getExitLocation())) {
+                    solved = true;
+                    return true;
+                }
+            }
         }
+
+        checkAllMoves();
+        solved = false;
+        return false;
     }
 
     public void copyBlocks(ArrayList<Block> oldBlocks) {
         for (Block block : oldBlocks) {
-            blocks.add(new Block(block.getXyLocation(), block.getID(), block.getLength(), block.getDirection()));
+            blocks.add(new Block(block.getXyLocation(), block.getID(), block.getLength(), block.getDirection(), block.getStart()));
         }
     }
 
-    public void findValidMoves() {
-        //Find all valid moves and create game state
+    public void checkAllMoves() {
+        for (Block block : blocks) {
+            checkMove(block, -1);
+            checkMove(block, 1);
+        }
+    }
+
+    public void checkMove(Block block, int direction) {
+        boolean valid = true;
+
+        for (Point point : block.getArea()) {
+            if (!checkBounds(point) || !checkCollision(block, point)) {
+                valid = false;
+                break;
+            }
+        }
+
+        if (valid) {
+            moveBlock(block, direction);
+            if(verifyHash()) {
+                moves.add(new GameState(game, blocks, depth + 1));
+            }
+
+            moveBlock(block, -direction);
+        }
+    }
+
+    private boolean checkBounds(Point point) {
+        if (point.x < 0 || point.y < 0 || point.x >= game.width || point.y >= game.height) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean checkCollision(Block block, Point point) {
+        for (Block otherBlock : blocks) {
+            if (!otherBlock.equals(block)) {
+                for (Point otherPoint : otherBlock.getArea()) {
+                    if (otherPoint.equals(point)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public void moveBlock(Block block, int direction) {
+        for (Point point : block.getArea()) {
+            if (block.getDirection.equals("vertical")) {
+                point.setLocation(point.x, point.y + direction);
+            } else if (block.getDirection.equals("horizontal")) {
+                point.setLocation(point.x + direction, point.y);
+            }
+        }
+
+        setHashKey();
+    }
+
+    private boolean verifyHash() {
+        for (GameState state : game.getAllStates()) {
+            if (state.getHashKey().equals(hashKey)) {
+                if (state.getDepth() > depth) {
+                    state.setDepth(depth + 1);
+                    moves.add(state);
+                }
+
+                return false;
+            }
+        }
+
+        return true;
     }
 }

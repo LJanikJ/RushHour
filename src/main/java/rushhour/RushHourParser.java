@@ -22,15 +22,26 @@ public class RushHourParser {
     private int height;
     private Point exitLocation;
 
+    private Iterator<Map<String, String>> blockIterator;
+
     public RushHourParser() {
 
     }
 
     public RushHourParser(String filename) {
         parse(filename);
+        blockIterator = blocks.iterator();
     }
 
     //Getters and setters
+    public Map nextBlock() {
+        if (blockIterator.hasNext()) {
+            return blockIterator.next();
+        } else {
+            return null;
+        }
+    }
+
     public int getWidth() {
         return width;
     }
@@ -47,7 +58,7 @@ public class RushHourParser {
         height = newHeight;
     }
 
-    public ArrayList<Map<String, String>> getBlocks() {
+    public ArrayList<Map> getBlocks() {
         return blocks;
     }
 
@@ -98,6 +109,7 @@ public class RushHourParser {
         block.put("y", blockJSON.get("y").toString());
         block.put("length", blockJSON.get("length").toString());
         block.put("direction", blockJSON.get("direction").toString());
+        block.put("start", blockJSON.get("start").toString());
 
         return block;
     }
