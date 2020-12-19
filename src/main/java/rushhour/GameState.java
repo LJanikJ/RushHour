@@ -2,12 +2,13 @@ package rushhour;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.lang.Math;
 
 /**
 * A single state of the game.
 */
 public class GameState {
-    private int hashKey;
+    private long hashKey;
     private int depth;
     private ArrayList<Block> blocks;
     private ArrayList<GameState> moves;
@@ -33,16 +34,26 @@ public class GameState {
     }
 
     //Getters and setters
-    public int getHashKey() {
+    public long getHashKey() {
         return hashKey;
     }
 
     public void setHashKey() {
-        //Generate hash value
-    }
+        hashKey = 0;
 
-    public void setHashKey(int newHashKey) {
-        hashKey = newHashKey;
+        if (game.getHeight() > game.getWidth()) {
+            int max = game.getHeight();
+        } else {
+            int max = game.getWidth();
+        }
+
+        for (int i = 0; i < blocks.size(); i++) {
+            if (blocks.get(i).getDirection().equals("vertical")) {
+                hashKey += blocks.get(i).getXyLocation().y * (long) pow(max, i);
+            } else if (blocks.get(i).getDirection().equals("horizontal")) {
+                hashKey += blocks.get(i).getXyLocation().x * (long) pow(max, i);
+            }
+        }
     }
 
     public int getDepth() {
