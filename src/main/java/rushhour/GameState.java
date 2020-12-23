@@ -15,7 +15,6 @@ public class GameState {
     private boolean solved;
     private RushHour game;
 
-
     public GameState() {
         blocks = new ArrayList<Block>();
         moves = new ArrayList<GameState>();
@@ -40,11 +39,10 @@ public class GameState {
 
     public void setHashKey() {
         hashKey = 0;
+        int max = game.getWidth() - 1;
 
         if (game.getHeight() > game.getWidth()) {
-            int max = game.getHeight();
-        } else {
-            int max = game.getWidth();
+            max = game.getHeight() - 1;
         }
 
         for (int i = 0; i < blocks.size(); i++) {
@@ -131,7 +129,7 @@ public class GameState {
     }
 
     private boolean checkBounds(Point point) {
-        if (point.x < 0 || point.y < 0 || point.x >= game.width || point.y >= game.height) {
+        if (point.x < 0 || point.y < 0 || point.x >= game.getWidth() || point.y >= game.getHeight()) {
             return false;
         }
 
@@ -175,5 +173,40 @@ public class GameState {
         }
 
         return true;
+    }
+
+    public void createDisplay() {
+        int[][] display = new int[game.getHeight()][game.getWidth()];
+
+        for (int i = 0; i < game.getHeight(); i++) {
+            for (int j = 0; j < game.getWidth(); j++) {
+                display[j][i] = -1;
+            }
+        }
+
+        for (Block block : blocks) {
+            for (Point point : block.getArea()) {
+                display[point.x][point.y] = block.getId();
+            }
+        }
+
+        return display;
+    }
+
+    public void displayState() {
+        int[][] displayArray = createDisplay();
+        String display = "";
+
+        for (int i = 0; i < game.getHeight(); i++) {
+            for (int j = 0; j < game.getWidth(); j++) {
+                if (displayArray[j][i] < 0) {
+                    display += "- ";
+                } else {
+                    display += displayArray[j][i].toString() + " ";
+                }
+            }
+
+            display += "\n";
+        }
     }
 }
