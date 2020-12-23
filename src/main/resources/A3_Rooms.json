@@ -1,0 +1,55 @@
+{
+	"block": [{
+			"id": 1,
+			"start": true,
+			"length": 2,
+			"direction": "horizontal",
+			"x": 0,
+			"y": 2
+		},
+		{
+			"id": 2,
+			"start": false,
+			"length": 3,
+			"direction": "vertical",
+			"x": 2,
+			"y": 0
+		},
+		{
+			"id": 3,
+			"start": false,
+			"length": 2,
+			"direction": "horizontal",
+			"x": 4,
+			"y": 0
+		},
+		{
+			"id": 4,
+			"start": false,
+			"length": 3,
+			"direction": "vertical",
+			"x": 5,
+			"y": 1
+		},
+		{
+			"id": 5,
+			"start": false,
+			"length": 2,
+			"direction": "vertical",
+			"x": 1,
+			"y": 3
+		},
+		{
+			"id": 6,
+			"start": false,
+			"length": 3,
+			"direction": "horizontal",
+			"x": 2,
+			"y": 3
+		},
+	],
+	"width": 6,
+	"height": 6,
+	"exitX": 4,
+	"exitY": 2
+}

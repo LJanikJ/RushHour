@@ -13,9 +13,11 @@ public class RushHour {
     private Point exitLocation;
     private GameState startingState;
     private HashMap<Long, GameState> allStates;
+    private int solutionDepth;
 
     public RushHour() {
         blocks = new ArrayList<Block>();
+        solutionDepth = 9999999;
 
         width = -1;
         height = -1;
@@ -74,8 +76,16 @@ public class RushHour {
         return height;
     }
 
-    public void setWidth(int newHeight) {
+    public void setHeight(int newHeight) {
         height = newHeight;
+    }
+
+    public int getSolutionDepth() {
+        return solutionDepth;
+    }
+
+    public void setSolutionDepth(int newSolutionDepth) {
+        solutionDepth = newSolutionDepth;
     }
 
     public Point getExitLocation() {
@@ -112,5 +122,9 @@ public class RushHour {
 
     public void addState(GameState newState) {
         allStates.put(newState.gethashKey(), newState);
+    }
+
+    public void findPath(GameState rootState) {
+        
     }
 }

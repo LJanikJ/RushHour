@@ -94,7 +94,7 @@ public class RushHourParser {
 
         exitLocation = new Point(exitX, exitY);
 
-        JSONArray blocksJSONArray = (JSONArray) puzzleJSON.get("blocks");
+        JSONArray blocksJSONArray = (JSONArray) puzzleJSON.get("block");
 
         for(int i = 0; i < blocksJSONArray.size(), i++) {
             blocks.add(singleBlock((JSONObject) blocksJSONArray.get(i)));

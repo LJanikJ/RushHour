@@ -25,12 +25,12 @@ public class GameState {
         moves = new ArrayList<GameState>();
 
         setGame(newGame);
+        game.addState(this);
+
         copyBlocks(oldBlocks);
         setDepth(newDepth);
         setHashKey();
-        checkSolved();
-
-        game.addState(this);
+        solved = checkSolved();
     }
 
     //Getters and setters
@@ -85,14 +85,12 @@ public class GameState {
         for (Block block : blocks) {
             if (block.getStart()) {
                 if (block.getXyLocation().equals(game.getExitLocation())) {
-                    solved = true;
                     return true;
                 }
             }
         }
 
         checkAllMoves();
-        solved = false;
         return false;
     }
 
@@ -110,12 +108,15 @@ public class GameState {
     }
 
     public void checkMove(Block block, int direction) {
-        boolean valid = true;
-
-        for (Point point : block.getArea()) {
-            if (!checkBounds(point) || !checkCollision(block, point)) {
-                valid = false;
-                break;
+        if (depth + 1 > game.getSolutionDepth()) {
+            boolean valid = false;
+        } else {
+            boolean valid = true;
+            for (Point point : block.getArea()) {
+                if (!checkBounds(point) || !checkCollision(block, point)) {
+                    valid = false;
+                    break;
+                }
             }
         }
 
