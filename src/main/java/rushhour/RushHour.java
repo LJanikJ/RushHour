@@ -1,6 +1,8 @@
 package rushhour;
 
 import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +28,7 @@ public class RushHour {
 
     public RushHour(RushHourParser parser) {
         blocks = new ArrayList<Block>();
-        allStates = new ArrayList<GameState>();
+        allStates = new HashMap<Long, GameState>();
 
         width = parser.getWidth();
         height = parser.getHeight();
@@ -34,7 +36,7 @@ public class RushHour {
 
         Map currBlock = parser.nextBlock();
 
-        while (currRoom != null) {
+        while (currBlock != null) {
             addBlock(currBlock);
             currBlock = parser.nextBlock();
         }
@@ -92,7 +94,7 @@ public class RushHour {
         return exitLocation;
     }
 
-    public void setExitLocation(int newExit) {
+    public void setExitLocation(Point newExit) {
         exitLocation = newExit;
     }
 
@@ -121,10 +123,14 @@ public class RushHour {
     }
 
     public void addState(GameState newState) {
-        allStates.put(newState.gethashKey(), newState);
+        allStates.put(newState.getHashKey(), newState);
     }
 
     public void findPath(GameState rootState) {
-        
+        //Find the optimal path to the solution
+    }
+
+    public String displayRoot() {
+        return startingState.displayState();
     }
 }

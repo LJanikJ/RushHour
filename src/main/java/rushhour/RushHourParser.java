@@ -3,6 +3,8 @@ package rushhour;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.awt.Point;
+import java.util.Iterator;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -54,11 +56,11 @@ public class RushHourParser {
         return height;
     }
 
-    public void setWidth(int newHeight) {
+    public void setHeight(int newHeight) {
         height = newHeight;
     }
 
-    public ArrayList<Map> getBlocks() {
+    public ArrayList<Map<String, String>> getBlocks() {
         return blocks;
     }
 
@@ -66,7 +68,7 @@ public class RushHourParser {
         return exitLocation;
     }
 
-    public void setExitLocation(int newExit) {
+    public void setExitLocation(Point newExit) {
         exitLocation = newExit;
     }
 
@@ -96,7 +98,7 @@ public class RushHourParser {
 
         JSONArray blocksJSONArray = (JSONArray) puzzleJSON.get("block");
 
-        for(int i = 0; i < blocksJSONArray.size(), i++) {
+        for(int i = 0; i < blocksJSONArray.size(); i++) {
             blocks.add(singleBlock((JSONObject) blocksJSONArray.get(i)));
         }
     }

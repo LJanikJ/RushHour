@@ -1,6 +1,7 @@
 package rushhour;
 
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
 * The game object.
@@ -22,7 +23,7 @@ public class Block {
         startingBlock = false;
     }
 
-    public Block(Point newXyLocation, int newId, int newLength, int newDirection, boolean starting) {
+    public Block(Point newXyLocation, int newId, int newLength, String newDirection, boolean starting) {
         xyLocation = newXyLocation;
         id = newId;
         length = newLength;
@@ -82,13 +83,15 @@ public class Block {
     }
 
     public void createArea() {
-        if (direction = "vertical") {
+        area = new ArrayList<>();
+
+        if (direction.equals("vertical")) {
             for (int i = 0; i < length; i++) {
-                area.add(new Point(xyLocation.getX, xyLocation.getY + i));
+                area.add(new Point(xyLocation.x, xyLocation.y + i));
             }
-        } else if (direction = "horizontal") {
+        } else if (direction.equals("horizontal")) {
             for (int i = 0; i < length; i++) {
-                area.add(new Point(xyLocation.getX + i, xyLocation.getY));
+                area.add(new Point(xyLocation.x + i, xyLocation.y));
             }
         }
     }
