@@ -19,7 +19,7 @@ public class RushHour {
 
     public RushHour() {
         blocks = new ArrayList<Block>();
-        solutionDepth = 9999999;
+        solutionDepth = 10000;
 
         width = -1;
         height = -1;
@@ -30,6 +30,7 @@ public class RushHour {
         blocks = new ArrayList<Block>();
         allStates = new HashMap<Long, GameState>();
 
+        solutionDepth = 10000;
         width = parser.getWidth();
         height = parser.getHeight();
         exitLocation = parser.getExitLocation();
@@ -131,6 +132,7 @@ public class RushHour {
     }
 
     public String displayRoot() {
+        System.out.println(allStates.size());
         return startingState.displayState();
     }
 }

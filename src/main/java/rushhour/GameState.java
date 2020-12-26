@@ -24,12 +24,14 @@ public class GameState {
         moves = new ArrayList<GameState>();
 
         setGame(newGame);
-        game.addState(this);
 
         copyBlocks(oldBlocks);
         setDepth(newDepth);
         setHashKey();
+
         solved = checkSolved();
+
+        game.addState(this);
     }
 
     //Getters and setters
@@ -91,7 +93,9 @@ public class GameState {
         for (Block block : blocks) {
             if (block.getStart()) {
                 if (block.getXyLocation().equals(game.getExitLocation())) {
-                    game.setSolutionDepth(depth);
+                    if (depth < game.getSolutionDepth()) {
+                        game.setSolutionDepth(depth);
+                    }
                     return true;
                 }
             }
