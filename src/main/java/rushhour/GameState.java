@@ -116,10 +116,8 @@ public class GameState {
 
     public void checkAllMoves() {
         for (Block block : blocks) {
-            for (int i = 1; i < game.getMax() - 1; i++) {
-                checkMove(block, -i);
-                checkMove(block, i);
-            }
+            checkMove(block, -1);
+            checkMove(block, 1);
         }
     }
 

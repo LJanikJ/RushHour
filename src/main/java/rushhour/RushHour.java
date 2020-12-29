@@ -71,12 +71,10 @@ public class RushHour {
         int i = 0;
 
         startingState = new GameState(this, blocks, 0);
-        stateQueue.add(startingState);
 
         while (i < stateQueue.size()) {
-            stateQueue.get(i).checkSolved();
-            //stateQueue.get(i)
             allStates.put(stateQueue.get(i).getHashKey(), stateQueue.get(i));
+            stateQueue.get(i).checkSolved();
             if (stateQueue.get(i).isSolved()) {
                 break;
             }
@@ -84,6 +82,7 @@ public class RushHour {
             i++;
         }
     }
+
 
     //Getters and setters
     public int getWidth() {
@@ -160,7 +159,9 @@ public class RushHour {
     }
 
     public String displayRoot() {
+        System.out.println(stateQueue.size());
         System.out.println(allStates.size());
+        //System.out.println(stateQueue.get(1).displayState());
         return startingState.displayState();
     }
 }
