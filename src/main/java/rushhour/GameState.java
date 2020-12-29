@@ -168,12 +168,10 @@ public class GameState {
     }
 
     public void moveBlock(Block block, int direction) {
-        for (Point point : block.getArea()) {
-            if (block.getDirection().equals("vertical")) {
-                point.setLocation(point.x, point.y + direction);
-            } else if (block.getDirection().equals("horizontal")) {
-                point.setLocation(point.x + direction, point.y);
-            }
+        if (block.getDirection().equals("vertical")) {
+            block.setXyLocation(new Point (block.getXyLocation().x, block.getXyLocation().y + direction));
+        } else if (block.getDirection().equals("horizontal")) {
+            block.setXyLocation(new Point (block.getXyLocation().x + direction, block.getXyLocation().y));
         }
 
         setHashKey();

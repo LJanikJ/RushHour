@@ -40,6 +40,8 @@ public class Block {
 
     public void setXyLocation(Point newXyLocation) {
         xyLocation = newXyLocation;
+
+        createArea();
     }
 
     public int getId() {
