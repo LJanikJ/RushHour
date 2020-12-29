@@ -29,8 +29,6 @@ public class GameState {
         setDepth(newDepth);
         setHashKey();
 
-        solved = checkSolved();
-
         game.addState(this);
     }
 
@@ -41,11 +39,7 @@ public class GameState {
 
     public void setHashKey() {
         hashKey = 0;
-        int max = game.getWidth() - 1;
-
-        if (game.getHeight() > game.getWidth()) {
-            max = game.getHeight() - 1;
-        }
+        int max = game.getMax() - 1;
 
         for (int i = 0; i < blocks.size(); i++) {
             if (blocks.get(i).getDirection().equals("vertical")) {
@@ -96,11 +90,13 @@ public class GameState {
                     if (depth < game.getSolutionDepth()) {
                         game.setSolutionDepth(depth);
                     }
+                    solved = true;
                     return true;
                 }
             }
         }
 
+        solved = false;
         checkAllMoves();
         return false;
     }
@@ -120,8 +116,10 @@ public class GameState {
 
     public void checkAllMoves() {
         for (Block block : blocks) {
-            checkMove(block, -1);
-            checkMove(block, 1);
+            for (int i = 1; i < game.getMax() - 1; i++) {
+                checkMove(block, -i);
+                checkMove(block, i);
+            }
         }
     }
 

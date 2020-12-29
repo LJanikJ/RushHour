@@ -16,9 +16,13 @@ public class RushHour {
     private GameState startingState;
     private HashMap<Long, GameState> allStates;
     private int solutionDepth;
+    private ArrayList<GameState> stateQueue;
 
     public RushHour() {
         blocks = new ArrayList<Block>();
+        allStates = new HashMap<Long, GameState>();
+        stateQueue = new ArrayList<GameState>();
+
         solutionDepth = 10000;
 
         width = -1;
@@ -29,6 +33,7 @@ public class RushHour {
     public RushHour(RushHourParser parser) {
         blocks = new ArrayList<Block>();
         allStates = new HashMap<Long, GameState>();
+        stateQueue = new ArrayList<GameState>();
 
         solutionDepth = 10000;
         width = parser.getWidth();
@@ -63,7 +68,21 @@ public class RushHour {
     }
 
     public void makeGameTree() {
+        int i = 0;
+
         startingState = new GameState(this, blocks, 0);
+        stateQueue.add(startingState);
+
+        while (i < stateQueue.size()) {
+            stateQueue.get(i).checkSolved();
+            //stateQueue.get(i)
+            allStates.put(stateQueue.get(i).getHashKey(), stateQueue.get(i));
+            if (stateQueue.get(i).isSolved()) {
+                break;
+            }
+
+            i++;
+        }
     }
 
     //Getters and setters
@@ -81,6 +100,15 @@ public class RushHour {
 
     public void setHeight(int newHeight) {
         height = newHeight;
+    }
+
+    public int getMax() {
+        if (height > width) {
+            return height;
+        } else {
+            return width;
+        }
+        
     }
 
     public int getSolutionDepth() {
@@ -124,7 +152,7 @@ public class RushHour {
     }
 
     public void addState(GameState newState) {
-        allStates.put(newState.getHashKey(), newState);
+        stateQueue.add(newState);
     }
 
     public void findPath(GameState rootState) {
