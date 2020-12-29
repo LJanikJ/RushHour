@@ -85,7 +85,7 @@ public class GameState {
 
     public boolean checkSolved() {
         for (Block block : blocks) {
-            if (block.getStart()) {
+            if (block.getPrimary()) {
                 if (block.getXyLocation().equals(game.getExitLocation())) {
                     if (depth < game.getSolutionDepth()) {
                         game.setSolutionDepth(depth);
@@ -109,8 +109,8 @@ public class GameState {
             int copyId = block.getId();
             int copyLength = block.getLength();
             String copyDirection = block.getDirection();
-            boolean copyStart = block.getStart();
-            blocks.add(new Block(copyXy, copyId, copyLength, copyDirection, copyStart));
+            boolean copyPrimary = block.getPrimary();
+            blocks.add(new Block(copyXy, copyId, copyLength, copyDirection, copyPrimary));
         }
     }
 

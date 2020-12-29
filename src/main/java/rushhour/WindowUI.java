@@ -13,6 +13,5 @@ public class WindowUI {
         RushHour game = new RushHour(parser);
 
         System.out.println(game.displayRoot());
-        System.out.println(game.getSolutionDepth());
     }
 }

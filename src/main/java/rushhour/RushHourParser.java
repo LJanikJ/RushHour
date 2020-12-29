@@ -111,7 +111,7 @@ public class RushHourParser {
         block.put("y", blockJSON.get("y").toString());
         block.put("length", blockJSON.get("length").toString());
         block.put("direction", blockJSON.get("direction").toString());
-        block.put("start", blockJSON.get("start").toString());
+        block.put("primary", blockJSON.get("primary").toString());
 
         return block;
     }

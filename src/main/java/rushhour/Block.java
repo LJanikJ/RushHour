@@ -12,7 +12,7 @@ public class Block {
     private int length;
     private String direction;
     private ArrayList<Point> area;
-    private boolean startingBlock;
+    private boolean primaryBlock;
 
     public Block() {
         xyLocation = new Point(-1, -1);
@@ -20,15 +20,15 @@ public class Block {
         id = -1;
         length = -1;
         direction = "DEFAULT";
-        startingBlock = false;
+        primaryBlock = false;
     }
 
-    public Block(Point newXyLocation, int newId, int newLength, String newDirection, boolean starting) {
+    public Block(Point newXyLocation, int newId, int newLength, String newDirection, boolean primary) {
         xyLocation = newXyLocation;
         id = newId;
         length = newLength;
         direction = newDirection;
-        startingBlock = starting;
+        primaryBlock = primary;
 
         createArea();
     }
@@ -68,15 +68,15 @@ public class Block {
         direction = newDirection;
     }
 
-    public boolean getStart() {
-        return startingBlock;
+    public boolean getPrimary() {
+        return primaryBlock;
     }
 
-    public void setStart(String startValue) {
-        if (startValue.equals("true")) {
-            startingBlock = true;
+    public void setPrimary(String primaryValue) {
+        if (primaryValue.equals("true")) {
+            primaryBlock = true;
         } else {
-            startingBlock = false;
+            primaryBlock = false;
         }
     }
 

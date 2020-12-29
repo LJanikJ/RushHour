@@ -60,7 +60,7 @@ public class RushHour {
         block.setId(Integer.parseInt(toAdd.get("id").toString()));
         block.setLength(Integer.parseInt(toAdd.get("length").toString()));
         block.setDirection(toAdd.get("direction").toString());
-        block.setStart(toAdd.get("start").toString());
+        block.setPrimary(toAdd.get("primary").toString());
 
         block.createArea();
 
@@ -159,9 +159,8 @@ public class RushHour {
     }
 
     public String displayRoot() {
-        System.out.println(stateQueue.size());
         System.out.println(allStates.size());
-        //System.out.println(stateQueue.get(1).displayState());
+        System.out.println(getSolutionDepth());
         return startingState.displayState();
     }
 }
