@@ -68,18 +68,16 @@ public class RushHour {
     }
 
     public void makeGameTree() {
-        int i = 0;
-
         startingState = new GameState(this, blocks, 0);
 
-        while (i < stateQueue.size()) {
-            allStates.put(stateQueue.get(i).getHashKey(), stateQueue.get(i));
-            stateQueue.get(i).checkSolved();
-            if (stateQueue.get(i).isSolved()) {
+        while (stateQueue.size() > 0) {
+            allStates.put(stateQueue.get(0).getHashKey(), stateQueue.get(0));
+            stateQueue.get(0).checkSolved();
+            if (stateQueue.get(0).isSolved()) {
                 break;
             }
 
-            i++;
+            stateQueue.remove(0);
         }
     }
 
