@@ -124,25 +124,20 @@ public class GameState {
     public void checkMove(Block block, int direction) {
         boolean valid = true;
 
-        if (depth + 1 > game.getSolutionDepth()) {
-            valid = false;
-        } else {
-            for (Point point : block.getArea()) {
-                if (!checkBounds(point) || !checkCollision(block, point)) {
-                    valid = false;
-                    break;
-                }
+        moveBlock(block, direction);
+
+        for (Point point : block.getArea()) {
+            if (!checkBounds(point) || !checkCollision(block, point)) {
+                valid = false;
+                break;
             }
         }
 
-        if (valid) {
-            moveBlock(block, direction);
-            if(verifyHash()) {
-                moves.add(new GameState(game, blocks, depth + 1));
-            }
-
-            moveBlock(block, -direction);
+        if (valid && verifyHash()) {
+            moves.add(new GameState(game, blocks, depth + 1));
         }
+
+        moveBlock(block, -direction);
     }
 
     private boolean checkBounds(Point point) {
@@ -170,8 +165,10 @@ public class GameState {
     public void moveBlock(Block block, int direction) {
         if (block.getDirection().equals("vertical")) {
             block.setXyLocation(new Point (block.getXyLocation().x, block.getXyLocation().y + direction));
+            block.createArea();
         } else if (block.getDirection().equals("horizontal")) {
             block.setXyLocation(new Point (block.getXyLocation().x + direction, block.getXyLocation().y));
+            block.createArea();
         }
 
         setHashKey();

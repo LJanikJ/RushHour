@@ -161,6 +161,7 @@ public class RushHour {
     public String displayRoot() {
         System.out.println(allStates.size());
         System.out.println(getSolutionDepth());
+        //System.out.println(stateQueue.get(2).displayState());
         return startingState.displayState();
     }
 }
