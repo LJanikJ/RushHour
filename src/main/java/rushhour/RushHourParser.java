@@ -22,7 +22,6 @@ public class RushHourParser {
     private ArrayList<Map<String, String>> blocks = new ArrayList<>();
     private int width;
     private int height;
-    private Point exitLocation;
 
     private Iterator<Map<String, String>> blockIterator;
 
@@ -64,14 +63,6 @@ public class RushHourParser {
         return blocks;
     }
 
-    public Point getExitLocation() {
-        return exitLocation;
-    }
-
-    public void setExitLocation(Point newExit) {
-        exitLocation = newExit;
-    }
-
     private void parse(String filename) {
         JSONParser parser = new JSONParser();
 
@@ -91,10 +82,6 @@ public class RushHourParser {
     private void readFile(JSONObject puzzleJSON) {
         setWidth(Integer.parseInt(puzzleJSON.get("width").toString()));
         setHeight(Integer.parseInt(puzzleJSON.get("height").toString()));
-        int exitX = Integer.parseInt(puzzleJSON.get("exitX").toString());
-        int exitY = Integer.parseInt(puzzleJSON.get("exitY").toString());
-
-        exitLocation = new Point(exitX, exitY);
 
         JSONArray blocksJSONArray = (JSONArray) puzzleJSON.get("block");
 

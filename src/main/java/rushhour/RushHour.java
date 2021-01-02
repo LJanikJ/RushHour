@@ -41,16 +41,36 @@ public class RushHour {
         solutionDepth = 10000;
         width = parser.getWidth();
         height = parser.getHeight();
-        exitLocation = parser.getExitLocation();
 
         Map currBlock = parser.nextBlock();
-
         while (currBlock != null) {
             addBlock(currBlock);
             currBlock = parser.nextBlock();
         }
 
+        exitLocation = findExitLocation();
+
         makeGameTree();
+    }
+
+    private Point findExitLocation() {
+        for (Block block : blocks) {
+            if (block.getPrimary()) {
+                if (block.getDirection().equals("horizontal")) {
+                    int exitX = width - block.getLength();
+                    int exitY = block.getXyLocation().y;
+
+                    return new Point(exitX, exitY);
+                } else {
+                    int exitX = block.getXyLocation().x;
+                    int exitY = height - block.getLength();
+
+                    return new Point(exitX, exitY);
+                }
+            }
+        }
+
+        return new Point(-1, -1);
     }
 
     private void addBlock(Map toAdd) {
@@ -157,6 +177,10 @@ public class RushHour {
 
     public void findPath() {
         hasSolution(startingState);
+    }
+
+    public ArrayList<GameState> getPath() {
+        return optimalPath;
     }
 
     private boolean hasSolution(GameState state) {
