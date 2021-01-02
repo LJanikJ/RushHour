@@ -9,7 +9,7 @@ public class WindowUI {
     }
 
     public static void main(String[] args) {
-        RushHourParser parser = new RushHourParser("./src/main/resources/RushHour.json");
+        RushHourParser parser = new RushHourParser("./src/main/resources/RushHourEx2.json");
         RushHour game = new RushHour(parser);
 
         System.out.println(game.displayPath());
