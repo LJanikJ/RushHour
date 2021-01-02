@@ -116,8 +116,10 @@ public class GameState {
 
     public void checkAllMoves() {
         for (Block block : blocks) {
-            checkMove(block, -1);
-            checkMove(block, 1);
+            for (int i = 1; i < block.getLength() + 1; i++) {
+                checkMove(block, -i);
+                checkMove(block, i);
+            }
         }
     }
 
