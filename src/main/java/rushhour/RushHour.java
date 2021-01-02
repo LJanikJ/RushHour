@@ -17,11 +17,13 @@ public class RushHour {
     private HashMap<Long, GameState> allStates;
     private int solutionDepth;
     private ArrayList<GameState> stateQueue;
+    private ArrayList<GameState> optimalPath;
 
     public RushHour() {
         blocks = new ArrayList<Block>();
         allStates = new HashMap<Long, GameState>();
         stateQueue = new ArrayList<GameState>();
+        optimalPath = new ArrayList<GameState>();
 
         solutionDepth = 10000;
 
@@ -34,6 +36,7 @@ public class RushHour {
         blocks = new ArrayList<Block>();
         allStates = new HashMap<Long, GameState>();
         stateQueue = new ArrayList<GameState>();
+        optimalPath = new ArrayList<GameState>();
 
         solutionDepth = 10000;
         width = parser.getWidth();
@@ -152,14 +155,47 @@ public class RushHour {
         stateQueue.add(newState);
     }
 
-    public void findPath(GameState rootState) {
-        //Find the optimal path to the solution
+    public void findPath() {
+        hasSolution(startingState);
+    }
+
+    private boolean hasSolution(GameState state) {
+        optimalPath.add(state);
+
+        if (state.isSolved()) {
+            return true;
+        }
+
+        for (GameState move : state.getMoves()) {
+            if (hasSolution(move)) {
+                return true;
+            }
+        }
+
+        optimalPath.remove(state);
+
+        return false;
     }
 
     public String displayRoot() {
-        System.out.println(allStates.size());
-        System.out.println(getSolutionDepth());
-        //System.out.println(stateQueue.get(2).displayState());
-        return startingState.displayState();
+        String displayString = "";
+
+        displayString += "Number of states created: " + allStates.size() + "\n";
+        displayString += "Solution Depth: " + getSolutionDepth() + "\n";
+        displayString += startingState.displayState();
+
+        return displayString;
+    }
+
+    public String displayPath() {
+        findPath();
+
+        String displayString = "";
+
+        for (GameState state : optimalPath) {
+            displayString += state.displayState() + "\n";
+        }
+
+        return displayString;
     }
 }

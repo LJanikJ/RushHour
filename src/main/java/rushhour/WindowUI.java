@@ -12,6 +12,7 @@ public class WindowUI {
         RushHourParser parser = new RushHourParser("./src/main/resources/RushHour.json");
         RushHour game = new RushHour(parser);
 
-        System.out.println(game.displayRoot());
+        System.out.println(game.displayPath());
+        //System.out.println(game.displayRoot());
     }
 }
