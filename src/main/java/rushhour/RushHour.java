@@ -180,6 +180,7 @@ public class RushHour {
     }
 
     public ArrayList<GameState> getPath() {
+        findPath();
         return optimalPath;
     }
 
