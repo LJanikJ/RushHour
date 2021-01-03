@@ -8,7 +8,7 @@ import java.util.ArrayList;
 */
 public class Block {
     private Point xyLocation;
-    private int id;
+    private String id;
     private int length;
     private String direction;
     private ArrayList<Point> area;
@@ -17,13 +17,13 @@ public class Block {
     public Block() {
         xyLocation = new Point(-1, -1);
         area = new ArrayList<Point>();
-        id = -1;
+        id = "-1";
         length = -1;
         direction = "DEFAULT";
         primaryBlock = false;
     }
 
-    public Block(Point newXyLocation, int newId, int newLength, String newDirection, boolean primary) {
+    public Block(Point newXyLocation, String newId, int newLength, String newDirection, boolean primary) {
         xyLocation = newXyLocation;
         id = newId;
         length = newLength;
@@ -44,11 +44,11 @@ public class Block {
         createArea();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int newId) {
+    public void setId(String newId) {
         id = newId;
     }
 

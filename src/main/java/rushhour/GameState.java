@@ -106,7 +106,7 @@ public class GameState {
 
         for (Block block : oldBlocks) {
             Point copyXy = block.getXyLocation();
-            int copyId = block.getId();
+            String copyId = block.getId();
             int copyLength = block.getLength();
             String copyDirection = block.getDirection();
             boolean copyPrimary = block.getPrimary();
@@ -189,12 +189,12 @@ public class GameState {
         return true;
     }
 
-    public int[][] createDisplay() {
-        int[][] display = new int[game.getHeight()][game.getWidth()];
+    public String[][] createDisplay() {
+        String[][] display = new String[game.getHeight()][game.getWidth()];
 
         for (int i = 0; i < game.getHeight(); i++) {
             for (int j = 0; j < game.getWidth(); j++) {
-                display[j][i] = -1;
+                display[j][i] = "-1";
             }
         }
 
@@ -208,12 +208,12 @@ public class GameState {
     }
 
     public String displayState() {
-        int[][] displayArray = createDisplay();
+        String[][] displayArray = createDisplay();
         String display = "";
 
         for (int i = 0; i < game.getHeight(); i++) {
             for (int j = 0; j < game.getWidth(); j++) {
-                if (displayArray[j][i] < 0) {
+                if (displayArray[j][i].equals("-1")) {
                     display += "- ";
                 } else {
                     display += displayArray[j][i] + " ";

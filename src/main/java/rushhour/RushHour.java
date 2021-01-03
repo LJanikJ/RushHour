@@ -80,7 +80,7 @@ public class RushHour {
         int y = Integer.parseInt(toAdd.get("y").toString());
 
         block.setXyLocation(new Point (x, y));
-        block.setId(Integer.parseInt(toAdd.get("id").toString()));
+        block.setId(toAdd.get("id").toString());
         block.setLength(Integer.parseInt(toAdd.get("length").toString()));
         block.setDirection(toAdd.get("direction").toString());
         block.setPrimary(toAdd.get("primary").toString());
@@ -202,15 +202,15 @@ public class RushHour {
         return false;
     }
 
-    public String displayRoot() {
-        String displayString = "";
+    // public String displayRoot() {
+    //     String displayString = "";
 
-        displayString += "Number of states created: " + allStates.size() + "\n";
-        displayString += "Solution Depth: " + getSolutionDepth() + "\n";
-        displayString += startingState.displayState();
+    //     displayString += "Number of states created: " + allStates.size() + "\n";
+    //     displayString += "Solution Depth: " + getSolutionDepth() + "\n";
+    //     displayString += startingState.displayState();
 
-        return displayString;
-    }
+    //     return displayString;
+    // }
 
     public String displayPath() {
         findPath();
