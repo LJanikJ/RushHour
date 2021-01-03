@@ -94,18 +94,15 @@ public class WindowUI {
 
         int solutionLength = game.getPath().size();
         int index = 0;
-
         char userInput = 'h';
         gameUI.putString(game.getPath().get(index).displayState(), 0, 1);
 
         while (userInput != 'q') {
             userInput = gameUI.getInput();
             if (userInput == 'a' && index > 0) {
-                gameUI.clearScreen();
                 index--;
                 gameUI.putString(game.getPath().get(index).displayState(), 0, 1);
             } else if (userInput == 'd' && index < solutionLength - 1) {
-                gameUI.clearScreen();
                 index++;
                 gameUI.putString(game.getPath().get(index).displayState(), 0, 1);
             }
