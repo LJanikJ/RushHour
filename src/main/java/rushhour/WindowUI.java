@@ -88,8 +88,10 @@ public class WindowUI {
     }
 
     public static void main(String[] args) {
+        String filename = "./src/main/resources/RushHourEx1.json";
+
         System.out.println("Solving...");
-        RushHourParser parser = new RushHourParser("./src/main/resources/RushHourEx2.json");
+        RushHourParser parser = new RushHourParser(filename);
         RushHour game = new RushHour(parser);
         WindowUI gameUI = new WindowUI();
 

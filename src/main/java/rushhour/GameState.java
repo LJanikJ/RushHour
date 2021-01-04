@@ -167,12 +167,11 @@ public class GameState {
     public void moveBlock(Block block, int direction) {
         if (block.getDirection().equals("vertical")) {
             block.setXyLocation(new Point (block.getXyLocation().x, block.getXyLocation().y + direction));
-            block.createArea();
-        } else if (block.getDirection().equals("horizontal")) {
+        } else {
             block.setXyLocation(new Point (block.getXyLocation().x + direction, block.getXyLocation().y));
-            block.createArea();
         }
 
+        block.createArea();
         setHashKey();
     }
 
@@ -194,13 +193,13 @@ public class GameState {
 
         for (int i = 0; i < game.getHeight(); i++) {
             for (int j = 0; j < game.getWidth(); j++) {
-                display[j][i] = "-1";
+                display[i][j] = "-1";
             }
         }
 
         for (Block block : blocks) {
             for (Point point : block.getArea()) {
-                display[point.x][point.y] = block.getId();
+                display[point.y][point.x] = block.getId();
             }
         }
 
@@ -213,10 +212,10 @@ public class GameState {
 
         for (int i = 0; i < game.getHeight(); i++) {
             for (int j = 0; j < game.getWidth(); j++) {
-                if (displayArray[j][i].equals("-1")) {
+                if (displayArray[i][j].equals("-1")) {
                     display += "- ";
                 } else {
-                    display += displayArray[j][i] + " ";
+                    display += displayArray[i][j] + " ";
                 }
             }
 

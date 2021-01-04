@@ -27,8 +27,6 @@ public class RushHour {
 
         solutionDepth = 10000;
 
-        width = -1;
-        height = -1;
         exitLocation = new Point(-1, -1);
     }
 
@@ -70,6 +68,7 @@ public class RushHour {
             }
         }
 
+        System.out.println("Exit error");
         return new Point(-1, -1);
     }
 
@@ -201,16 +200,6 @@ public class RushHour {
 
         return false;
     }
-
-    // public String displayRoot() {
-    //     String displayString = "";
-
-    //     displayString += "Number of states created: " + allStates.size() + "\n";
-    //     displayString += "Solution Depth: " + getSolutionDepth() + "\n";
-    //     displayString += startingState.displayState();
-
-    //     return displayString;
-    // }
 
     public String displayPath() {
         findPath();

@@ -3,43 +3,43 @@
 			"id": 1,
 			"primary": true,
 			"length": 2,
-			"direction": "horizontal",
-			"x": 0,
-			"y": 2
+			"direction": "vertical",
+			"x": 3,
+			"y": 0
 		},
 		{
 			"id": 2,
 			"primary": false,
 			"length": 3,
 			"direction": "vertical",
-			"x": 2,
-			"y": 2
+			"x": 0,
+			"y": 0
 		},
 		{
 			"id": 3,
 			"primary": false,
 			"length": 3,
 			"direction": "horizontal",
-			"x": 0,
-			"y": 5
+			"x": 1,
+			"y": 2
 		},
 		{
 			"id": 4,
 			"primary": false,
-			"length": 3,
-			"direction": "vertical",
-			"x": 5,
-			"y": 0
+			"length": 2,
+			"direction": "horizontal",
+			"x": 0,
+			"y": 3
 		},
 		{
 			"id": 5,
 			"primary": false,
-			"length": 2,
-			"direction": "vertical",
-			"x": 3,
-			"y": 4
+			"length": 3,
+			"direction": "horizontal",
+			"x": 0,
+			"y": 5
 		}
 	],
-	"width": 6,
+	"width": 4,
 	"height": 6
 }
