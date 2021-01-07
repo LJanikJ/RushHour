@@ -144,6 +144,10 @@ public class RushHour {
 
 
     //Getters and setters
+    /**
+    Gets the width of the board.
+    @return (int) width
+    */
     public int getWidth() {
         return width;
     }
@@ -152,6 +156,10 @@ public class RushHour {
         width = newWidth;
     }
 
+    /**
+    Gets the height of the board.
+    @return (int) height
+    */
     public int getHeight() {
         return height;
     }
@@ -160,6 +168,10 @@ public class RushHour {
         height = newHeight;
     }
 
+    /**
+    Gets the max value between height and width of the board.
+    @return (int) max
+    */
     public int getMax() {
         if (height > width) {
             return height;
@@ -169,6 +181,10 @@ public class RushHour {
         
     }
 
+    /**
+    Gets the number of moves the optimal solution takes.
+    @return (int) solutionDepth
+    */
     public int getSolutionDepth() {
         return solutionDepth;
     }
@@ -177,6 +193,10 @@ public class RushHour {
         solutionDepth = newSolutionDepth;
     }
 
+    /**
+    Gets the xy location that the primary block must reach.
+    @return (Point) exitLocation
+    */
     public Point getExitLocation() {
         return exitLocation;
     }
@@ -185,6 +205,10 @@ public class RushHour {
         exitLocation = newExit;
     }
 
+    /**
+    Gets the arraylist of all blocks.
+    @return (ArrayList) blocks
+    */
     public ArrayList<Block> getBlocks() {
         return blocks;
     }
@@ -193,10 +217,19 @@ public class RushHour {
         blocks = newBlocks;
     }
 
+    /**
+    Gets the hashMap of each key and its corresponding state.
+    @return (HashMap) allStates
+    */
     public Map getAllStates() {
         return allStates;
     }
 
+    /**
+    Determines if a state exists based on the given key.
+    @param hashKey
+    @return (boolean) True if the state exists, false if not
+    */
     public boolean findState(long hashKey) {
         if (allStates.get(hashKey) != null) {
             return true;
@@ -205,46 +238,76 @@ public class RushHour {
         return false;
     }
 
+    /**
+    Gets a game state based on the given key.
+    @param hashKey
+    @return (gameState) The state given from the hashKey
+    */
     public GameState getState(long hashKey) {
         return allStates.get(hashKey);
     }
 
+    /**
+    Inserts a new game state into the hashMap.
+    @param newState The state to be added
+    */
     public void addState(GameState newState) {
         stateQueue.add(newState);
     }
 
+    /**
+    Initiates the recursive path-finding algorithm.
+    */
     public void findPath() {
         hasSolution(startingState);
     }
 
+    /**
+    Returns the path found via the recursive path-finding algorithm.
+    @return (ArrayList) The optimal path of the solution
+    */
     public ArrayList<GameState> getPath() {
         findPath();
         return optimalPath;
     }
 
+    /**
+    Recursively searches game states for a solution.
+    @param state The state that is evaluated
+    @return (boolean) Whether the state lies on the most efficient path for the solution
+    */
     private boolean hasSolution(GameState state) {
+        //Add the state to the arraylist
         optimalPath.add(state);
 
+        //If it is the solution, it remains added
         if (state.isSolved()) {
             return true;
         }
 
+        //Check if each move is a solution or is along the path
         for (GameState move : state.getMoves()) {
             if (hasSolution(move)) {
                 return true;
             }
         }
 
+        //If the state is not along the solution path, remove from arraylist
         optimalPath.remove(state);
 
         return false;
     }
 
+    /**
+    Returns the display of the path found via the recursive path-finding algorithm.
+    @return (String) The display representing every state in the solution
+    */
     public String displayPath() {
         findPath();
 
         String displayString = "";
 
+        //Separate each state by a newline
         for (GameState state : optimalPath) {
             displayString += state.displayState() + "\n";
         }
