@@ -1,6 +1,6 @@
 {
 	"block": [{
-			"id": 1,
+			"id": "A",
 			"primary": true,
 			"length": 2,
 			"direction": "vertical",
@@ -8,7 +8,7 @@
 			"y": 0
 		},
 		{
-			"id": 2,
+			"id": "B",
 			"primary": false,
 			"length": 3,
 			"direction": "vertical",
@@ -16,7 +16,7 @@
 			"y": 0
 		},
 		{
-			"id": 3,
+			"id": "C",
 			"primary": false,
 			"length": 3,
 			"direction": "horizontal",
@@ -24,7 +24,7 @@
 			"y": 2
 		},
 		{
-			"id": 4,
+			"id": "D",
 			"primary": false,
 			"length": 2,
 			"direction": "horizontal",
@@ -32,7 +32,7 @@
 			"y": 3
 		},
 		{
-			"id": 5,
+			"id": "E",
 			"primary": false,
 			"length": 3,
 			"direction": "horizontal",

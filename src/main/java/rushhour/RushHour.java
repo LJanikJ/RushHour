@@ -88,6 +88,8 @@ public class RushHour {
         //This should never be reached, only reached with no primary
         System.out.println("Exit error");
         System.exit(1);
+
+        return new Point(-1, -1);
     }
 
     private void addBlock(Map toAdd) {

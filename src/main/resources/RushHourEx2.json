@@ -1,6 +1,6 @@
 {
 	"block": [{
-			"id": 1,
+			"id": "A",
 			"primary": true,
 			"length": 2,
 			"direction": "horizontal",
@@ -8,7 +8,7 @@
 			"y": 2
 		},
 		{
-			"id": 2,
+			"id": "B",
 			"primary": false,
 			"length": 3,
 			"direction": "vertical",
@@ -16,7 +16,7 @@
 			"y": 0
 		},
 		{
-			"id": 3,
+			"id": "C",
 			"primary": false,
 			"length": 2,
 			"direction": "vertical",
@@ -24,7 +24,7 @@
 			"y": 0
 		},
 		{
-			"id": 4,
+			"id": "D",
 			"primary": false,
 			"length": 2,
 			"direction": "horizontal",
@@ -32,7 +32,7 @@
 			"y": 1
 		},
 		{
-			"id": 5,
+			"id": "E",
 			"primary": false,
 			"length": 2,
 			"direction": "vertical",
@@ -40,7 +40,7 @@
 			"y": 2
 		},
 		{
-			"id": 6,
+			"id": "F",
 			"primary": false,
 			"length": 3,
 			"direction": "vertical",
@@ -48,7 +48,7 @@
 			"y": 3
 		},
 		{
-			"id": 7,
+			"id": "G",
 			"primary": false,
 			"length": 2,
 			"direction": "horizontal",
@@ -56,7 +56,7 @@
 			"y": 3
 		},
 		{
-			"id": 8,
+			"id": "H",
 			"primary": false,
 			"length": 2,
 			"direction": "horizontal",
@@ -64,7 +64,7 @@
 			"y": 4
 		},
 		{
-			"id": 9,
+			"id": "I",
 			"primary": false,
 			"length": 2,
 			"direction": "vertical",
