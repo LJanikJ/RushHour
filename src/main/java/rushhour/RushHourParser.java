@@ -25,16 +25,28 @@ public class RushHourParser {
 
     private Iterator<Map<String, String>> blockIterator;
 
+    /**
+    Default constructor.
+    */
     public RushHourParser() {
 
     }
 
+    /**
+    Constructor from filename.
+    @param filename
+    */
     public RushHourParser(String filename) {
         parse(filename);
         blockIterator = blocks.iterator();
     }
 
     //Getters and setters
+
+    /**
+    Returns the next block in the blocks arraylist.
+    @return (Map) block hashMap
+    */
     public Map nextBlock() {
         if (blockIterator.hasNext()) {
             return blockIterator.next();
@@ -43,22 +55,42 @@ public class RushHourParser {
         }
     }
 
+    /**
+    Gets the width variable.
+    @return (int) width
+    */
     public int getWidth() {
         return width;
     }
 
+    /**
+    Sets the width variable.
+    @param newWidth
+    */
     public void setWidth(int newWidth) {
         width = newWidth;
     }
 
+    /**
+    Gets the height variable.
+    @return (int) height
+    */
     public int getHeight() {
         return height;
     }
 
+    /**
+    Sets the height variable.
+    @param newHeight
+    */
     public void setHeight(int newHeight) {
         height = newHeight;
     }
 
+    /**
+    Gets the blocks arraylist.
+    @return (ArrayList) blocks
+    */
     public ArrayList<Map<String, String>> getBlocks() {
         return blocks;
     }

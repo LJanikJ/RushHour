@@ -15,6 +15,9 @@ import java.io.IOException;
 public class WindowUI {
     private TerminalScreen screen;
 
+    /**
+    Default constructor.
+    */
     public WindowUI() {
         super();
 
@@ -30,6 +33,10 @@ public class WindowUI {
         }
     }
 
+    /**
+    Returns a keystroke from the user.
+    @return (Char) User input
+    */
     public char getInput() {
         KeyStroke keyStroke = null;
         char returnChar;
@@ -42,15 +49,6 @@ public class WindowUI {
         }
 
         return getKeyStroke(keyStroke);
-    }
-
-    public void clearScreen() {
-        try {
-            screen.clear();
-            screen.refresh();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

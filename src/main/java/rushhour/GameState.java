@@ -15,11 +15,20 @@ public class GameState {
     private boolean solved;
     private RushHour game;
 
+    /**
+    Default constructor.
+    */
     public GameState() {
         blocks = new ArrayList<Block>();
         moves = new ArrayList<GameState>();
     }
 
+    /**
+    Recursive constructor.
+    @param newGame The game object
+    @param oldBlocks The set of blocks from the previous state
+    @param newDepth The depth of the new state (old state plus one)
+    */
     public GameState(RushHour newGame, ArrayList<Block> oldBlocks, int newDepth) {
         moves = new ArrayList<GameState>();
 
@@ -33,6 +42,11 @@ public class GameState {
     }
 
     //Getters and setters
+
+    /**
+    Gets the hashKey of the state.
+    @return (long) hashKey
+    */
     public long getHashKey() {
         return hashKey;
     }
@@ -50,39 +64,74 @@ public class GameState {
         }
     }
 
+    /**
+    Gets the depth of the state.
+    @return (int) depth
+    */
     public int getDepth() {
         return depth;
     }
 
+    /**
+    Sets the depth of the game state.
+    @param newDepth
+    */
     public void setDepth(int newDepth) {
         depth = newDepth;
     }
 
+    /**
+    Gets the game object.
+    @return (RushHour) game
+    */
     public RushHour getGame() {
         return game;
     }
 
+    /**
+    Sets the game object.
+    @param newGame
+    */
     public void setGame(RushHour newGame) {
         game = newGame;
     }
 
+    /**
+    Gets the arraylist of blocks in the state.
+    @return (ArrayList) blocks
+    */
     public ArrayList<Block> getBlocks() {
         return blocks;
     }
 
+    /**
+    Sets the blocks in the game state.
+    @param newBlocks
+    */
     public void setBlocks(ArrayList<Block> newBlocks) {
         blocks = newBlocks;
     }
 
+    /**
+    Gets the arraylist of possible moves.
+    @return (ArrayList) moves
+    */
     public ArrayList<GameState> getMoves() {
         return moves;
     }
 
+    /**
+    Gets the solved variable.
+    @return (boolean) solved
+    */
     public boolean isSolved() {
         return solved;
     }
 
-
+    /**
+    Checks if the state is in a solved position and sets the solved variable.
+    @return (boolean) solved
+    */
     public boolean checkSolved() {
         for (Block block : blocks) {
             if (block.getPrimary()) {
@@ -101,6 +150,10 @@ public class GameState {
         return false;
     }
 
+    /**
+    Copies the values of the old blocks without copying their reference.
+    @param oldBlocks
+    */
     public void copyBlocks(ArrayList<Block> oldBlocks) {
         blocks = new ArrayList<>();
 
@@ -114,6 +167,9 @@ public class GameState {
         }
     }
 
+    /**
+    Checks all possible moves in the game state.
+    */
     public void checkAllMoves() {
         for (Block block : blocks) {
             for (int i = 1; i < block.getLength() + 1; i++) {
@@ -123,7 +179,7 @@ public class GameState {
         }
     }
 
-    public void checkMove(Block block, int direction) {
+    private void checkMove(Block block, int direction) {
         boolean valid = true;
 
         moveBlock(block, direction);
@@ -164,7 +220,7 @@ public class GameState {
         return true;
     }
 
-    public void moveBlock(Block block, int direction) {
+    private void moveBlock(Block block, int direction) {
         if (block.getDirection().equals("vertical")) {
             block.setXyLocation(new Point (block.getXyLocation().x, block.getXyLocation().y + direction));
         } else {
@@ -188,6 +244,10 @@ public class GameState {
         return true;
     }
 
+    /**
+    Returns the display of the game state in array form.
+    @return (String[][]) display array
+    */
     public String[][] createDisplay() {
         String[][] display = new String[game.getHeight()][game.getWidth()];
 
@@ -206,6 +266,10 @@ public class GameState {
         return display;
     }
 
+    /**
+    Returns the display of the game state.
+    @return (String) display
+    */
     public String displayState() {
         String[][] displayArray = createDisplay();
         String display = "";

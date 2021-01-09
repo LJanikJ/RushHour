@@ -152,6 +152,10 @@ public class RushHour {
         return width;
     }
 
+    /**
+    Sets the width of the board.
+    @param newWidth
+    */
     public void setWidth(int newWidth) {
         width = newWidth;
     }
@@ -164,6 +168,10 @@ public class RushHour {
         return height;
     }
 
+    /**
+    Sets the height of the board.
+    @param newHeight
+    */
     public void setHeight(int newHeight) {
         height = newHeight;
     }
@@ -189,6 +197,10 @@ public class RushHour {
         return solutionDepth;
     }
 
+    /**
+    Sets the optimal solution depth.
+    @param newSolutionDepth
+    */
     public void setSolutionDepth(int newSolutionDepth) {
         solutionDepth = newSolutionDepth;
     }
@@ -201,6 +213,10 @@ public class RushHour {
         return exitLocation;
     }
 
+    /**
+    Sets the exit location point of the board.
+    @param newExit
+    */
     public void setExitLocation(Point newExit) {
         exitLocation = newExit;
     }
@@ -213,6 +229,10 @@ public class RushHour {
         return blocks;
     }
 
+    /**
+    Sets the blocks on the board.
+    @param newBlocks
+    */
     public void setBlocks(ArrayList<Block> newBlocks) {
         blocks = newBlocks;
     }
