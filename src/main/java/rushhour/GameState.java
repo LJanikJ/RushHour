@@ -32,12 +32,15 @@ public class GameState {
     public GameState(RushHour newGame, ArrayList<Block> oldBlocks, int newDepth) {
         moves = new ArrayList<GameState>();
 
+        //Keeps track of game object
         setGame(newGame);
 
+        //Set important values, copies block values
         copyBlocks(oldBlocks);
         setDepth(newDepth);
         setHashKey();
 
+        //Adds state to queue to be evaluated
         game.addState(this);
     }
 
@@ -52,9 +55,14 @@ public class GameState {
     }
 
     public void setHashKey() {
+        //Initializes hashKey and max
+        //Max represents the larger value between width and height of the board
         hashKey = 0;
         int max = game.getMax() - 1;
 
+        //Creates hashKey based on the position of each block using the formula pos*max^index
+        //Can be thought of as a number in the base of the value max with each digit
+        //representing the position of a block, converted to base 10
         for (int i = 0; i < blocks.size(); i++) {
             if (blocks.get(i).getDirection().equals("vertical")) {
                 hashKey += blocks.get(i).getXyLocation().y * (long) Math.pow(max, i);
@@ -133,18 +141,24 @@ public class GameState {
     @return (boolean) solved
     */
     public boolean checkSolved() {
+        //Finds primary block
         for (Block block : blocks) {
             if (block.getPrimary()) {
+                //If the block xy is at the exit location
                 if (block.getXyLocation().equals(game.getExitLocation())) {
+                    //Set solved and set games solution depth
                     if (depth < game.getSolutionDepth()) {
                         game.setSolutionDepth(depth);
                     }
                     solved = true;
                     return true;
                 }
+
+                break;
             }
         }
 
+        //If exit location not reached, set unsolved and check for valid moves
         solved = false;
         checkAllMoves();
         return false;
@@ -157,12 +171,15 @@ public class GameState {
     public void copyBlocks(ArrayList<Block> oldBlocks) {
         blocks = new ArrayList<>();
 
+        //Manually copies the value of each blocks variables
+        //This is create a new set of blocks unaffected by changes to the first set
         for (Block block : oldBlocks) {
             Point copyXy = block.getXyLocation();
             String copyId = block.getId();
             int copyLength = block.getLength();
             String copyDirection = block.getDirection();
             boolean copyPrimary = block.getPrimary();
+            //Add to blocks arraylist
             blocks.add(new Block(copyXy, copyId, copyLength, copyDirection, copyPrimary));
         }
     }
@@ -172,6 +189,7 @@ public class GameState {
     */
     public void checkAllMoves() {
         for (Block block : blocks) {
+            //Checks the moves in either direction up to the length of the block
             for (int i = 1; i < block.getLength() + 1; i++) {
                 checkMove(block, -i);
                 checkMove(block, i);
@@ -182,8 +200,10 @@ public class GameState {
     private void checkMove(Block block, int direction) {
         boolean valid = true;
 
+        //Move blocks first in order to verify validity
         moveBlock(block, direction);
 
+        //For every point in the moving block, check validity
         for (Point point : block.getArea()) {
             if (!checkBounds(point) || !checkCollision(block, point)) {
                 valid = false;
@@ -191,14 +211,17 @@ public class GameState {
             }
         }
 
+        //If valid, create a new game state and copy blocks values to new state
         if (valid && verifyHash()) {
             moves.add(new GameState(game, blocks, depth + 1));
         }
 
+        //Return blocks to original location by reversing move
         moveBlock(block, -direction);
     }
 
     private boolean checkBounds(Point point) {
+        //Check if point is within boundaries of board
         if (point.x < 0 || point.y < 0 || point.x >= game.getWidth() || point.y >= game.getHeight()) {
             return false;
         }
@@ -207,8 +230,10 @@ public class GameState {
     }
 
     private boolean checkCollision(Block block, Point point) {
+        //Checks all other blocks
         for (Block otherBlock : blocks) {
             if (!otherBlock.equals(block)) {
+                //Checks each point for collision
                 for (Point otherPoint : otherBlock.getArea()) {
                     if (otherPoint.equals(point)) {
                         return false;
@@ -221,18 +246,22 @@ public class GameState {
     }
 
     private void moveBlock(Block block, int direction) {
+        //Add direction to block xy value based on direction
         if (block.getDirection().equals("vertical")) {
             block.setXyLocation(new Point (block.getXyLocation().x, block.getXyLocation().y + direction));
         } else {
             block.setXyLocation(new Point (block.getXyLocation().x + direction, block.getXyLocation().y));
         }
 
+        //Recreate the blocks area and hashKey, as they have changed
         block.createArea();
         setHashKey();
     }
 
     private boolean verifyHash() {
+        //Check if the hashValue of the state is within the allStates hashMap
         if (game.findState(hashKey)) {
+            //If it exists at a greater depth, change its depth to reflect it can be reached earlier
             if (game.getState(hashKey).getDepth() > depth) {
                 game.getState(hashKey).setDepth(depth + 1);
                 moves.add(game.getState(hashKey));
@@ -251,12 +280,14 @@ public class GameState {
     public String[][] createDisplay() {
         String[][] display = new String[game.getHeight()][game.getWidth()];
 
+        //Set all base values to a "blank space" string
         for (int i = 0; i < game.getHeight(); i++) {
             for (int j = 0; j < game.getWidth(); j++) {
-                display[i][j] = "-1";
+                display[i][j] = "-";
             }
         }
 
+        //For each point in the block areas, set that array value to the block id
         for (Block block : blocks) {
             for (Point point : block.getArea()) {
                 display[point.y][point.x] = block.getId();
@@ -274,13 +305,10 @@ public class GameState {
         String[][] displayArray = createDisplay();
         String display = "";
 
+        //Print the array into a string with each layer split by newlines
         for (int i = 0; i < game.getHeight(); i++) {
             for (int j = 0; j < game.getWidth(); j++) {
-                if (displayArray[i][j].equals("-1")) {
-                    display += "- ";
-                } else {
-                    display += displayArray[i][j] + " ";
-                }
+                display += displayArray[i][j] + " ";
             }
 
             display += "\n";
