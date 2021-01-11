@@ -16,6 +16,8 @@ An up-to-date version of gradle allows you to run this program with the followin
 1. gradle build
 2. java -jar build/libs/RushHour.jar
 
+When the program is running and a solution is found, you can use the left and right arrow keys or the 'a' and 'd' keys to view each distinct state in the solution. Afterwards, just exit with the 'q' key.
+
 Examples
 --------
 
